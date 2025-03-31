@@ -12,6 +12,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import frc.robot.subsystems.SparkMaxNeo;
+import frc.robot.commands.testmotorspin;
+import frc.robot.commands.stopmotors;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -21,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final SparkMaxNeo m_sparkMaxNeo = new SparkMaxNeo(); //test sparkmax and Neo subsystem
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -29,6 +35,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    SmartDashboard.putData("Spin Motor 0", new testmotorspin(m_sparkMaxNeo, 0.25, 5));  // spin motor at x speed for y rotations
+    SmartDashboard.putData("Stop Motors", new stopmotors(m_sparkMaxNeo)); // stop motors
     configureBindings();
   }
 
